@@ -63,15 +63,6 @@ public class CustomMap<K, V> {
     }
     int hash = Math.abs(key.hashCode()) % capacity;
     return hash == 0 ? 1 : hash;
-//    while (!(table[hash] == null || table[hash].getKey().equals(key))) {
-//      hash = (hash + 1) % capacity;
-//      hash = hash == 0 ? 1 : hash;
-//      if (hash == key.hashCode() % capacity && table[hash] != null) {
-//        return hash;
-//      } else {
-//        return -1;
-//      }
-//    }
   }
 
   private void rehash() {
@@ -214,19 +205,4 @@ public class CustomMap<K, V> {
     return capacity;
   }
 
-//  @Override
-//  public String toString() {
-//    StringBuilder sb = new StringBuilder();
-//    for (int i = 0; i < capacity; i++) {
-//      if (table[i] == null) {
-//        sb.append(i + " : null\n");
-//      } else {
-//        sb.append(i +
-//            " : key = " + table[i].getKey() +
-//            ", value = " + table[i].getValue() + "\n"
-//        );
-//      }
-//    }
-//    return sb.toString();
-//  }
 }
