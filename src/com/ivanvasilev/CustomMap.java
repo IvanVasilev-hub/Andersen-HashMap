@@ -96,14 +96,14 @@ public class CustomMap<K, V> {
     return entry == null ? null : entry.getValue();
   }
 
-  public void remove(K key) {
+  public boolean remove(K key) {
     int index = getHash(key);
     Entry<K, V> entry = findEntry(key);
     if (entry != null) {
       if (table[index] == entry && entry.getNext() == null) {
         table[index] = null;
         size--;
-        return;
+        return true;
       }
       Entry<K, V> prevEntry = entry.getPrev();
       Entry<K, V> nextEntry = entry.getNext();
@@ -111,19 +111,20 @@ public class CustomMap<K, V> {
         prevEntry.setNext(nextEntry);
         nextEntry.setPrev(prevEntry);
         size--;
-        return;
+        return true;
       }
       if (prevEntry == null && nextEntry != null) {
         nextEntry.setPrev(null);
         table[index] = nextEntry;
         size--;
-        return;
+        return true;
       }
       if (prevEntry != null && nextEntry == null) {
         prevEntry.setNext(null);
         size--;
       }
     }
+    return false;
   }
 
   private Entry<K, V> findEntry(K key) {
